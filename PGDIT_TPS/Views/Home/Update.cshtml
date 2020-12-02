@@ -1,0 +1,15 @@
+﻿@model PGDIT_TPS.Models.Account.Account
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update</h2>
+@using (Html.BeginForm("UpdateDetails", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.EditorFor(model => model.Studentname)
+        <button class="btn btn-success">Update</button>
+        @*@Html.ActionLink("Update", "UpdateDetails", "Home")*@
+    </fieldset>
+}

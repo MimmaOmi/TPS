@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UserModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="T_USER">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERID" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="USERNAME" Type="varchar2" MaxLength="20" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="UserModelStoreContainer">
+    <EntitySet Name="T_USER" EntityType="Self.T_USER" Schema="C##PGDITTPS20" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
