@@ -23,9 +23,28 @@ namespace PGDIT_TPS.Models.Account
         public string contactno { get; set; }
         public string nid { get; set; }
         public string email { get; set; }
+        //public int genderid { get; set; }
+        public int accountno { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]        
         public DateTime dob { get; set; }
-    }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]
+        public DateTime issuedate { get; set; }
+        public HttpFileCollection image { get; set; }
+        //public Nullable<int> genderid { get; set; }
+        public string gender { get; set; }
+        public string religion { get; set; }
+        public string bankreceiptno { get; set; }
+        public string program { get; set; }
+        public string department { get; set; }
+        public int batchno { get; set; }
+        public decimal cgpa { get; set; }
+        public string sessionyear { get; set; }
+
+        //public virtual Gender genders { get; set; }
+
+    }    
 }

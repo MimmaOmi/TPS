@@ -25,28 +25,28 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a class="navbar-brand">
                     <img src="/assets/images/iit.png" alt="Techro HTML5 template">
-                    <span style="color:blue">@Session["Studentname"].ToString()</span>
+                    <span style="color:blue;font-size:14px">@Session["Studentname"].ToString().ToUpper()</span>
                 </a>
             </div> 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">                    
                     <li class="c1 active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="c2">@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="c2">@Html.ActionLink("About", "About", "Home")</li>                    
                     <li class="c3">@Html.ActionLink("Research", "Research", "Home")</li>
-                    <li class="c4">@Html.ActionLink("Register", "Register", "Home")</li>
-                    <li class="c5">@Html.ActionLink("Logout", "Logout", "Login")</li>
-                    <li class="c5">@Html.ActionLink("Profile", "Profile", "Home")</li>
-                    <li class="c1">@Html.ActionLink("Update", "Update", "Home")</li>
-                    <li class="c6 dropdown">
+                    <li class="c4 dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">Programs <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("PGDIT", "Programs", "Home")</li>
                             <li>@Html.ActionLink("MIT", "Programs", "Home")</li>
                             <li>@Html.ActionLink("CSE", "Programs", "Home")</li>
-                            <li>@Html.ActionLink("IIT", "Programs", "Home")</li>
+                            <li>@Html.ActionLink("MSSE", "Programs", "Home")</li>
                         </ul>
                     </li>
-                    <li class="c7">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="c5">@Html.ActionLink("Profile", "Profile", "Home", new { Studentid = Session["USERID"].ToString() }, htmlAttributes: null)</li>
+                    @*<li class="c5"><input type="button" onclick="profile()" value="Profile"/></li>*@                    
+                    <li class="c6">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="c7">@Html.ActionLink("Logout", "Logout", "Login")</li>
+                    <li class="c1">@Html.ActionLink("Update", "Update", "Home", new { Studentid = Session["USERID"].ToString() }, htmlAttributes: null)</li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -219,7 +219,7 @@
         <script type='text/javascript' src='/assets/js/camera.min.js'></script>
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="/assets/js/custom.js"></script>
-        <script>
+    <script>
 		jQuery(function(){
 
 			jQuery('#camera_wrap_4').camera({
@@ -237,7 +237,6 @@
 			});
 
 		});
-
         </script>
 </body>
 </html>

@@ -13,9 +13,6 @@ namespace PGDIT_TPS.Controllers
 {
     public class LoginController : Controller
     {
-        //OracleConnection con = new OracleConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
-        //OracleCommand cmd = new OracleCommand();
-        //OracleDataReader dr;
         // GET: Login
         public ActionResult Login()
         {

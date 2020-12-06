@@ -6,6 +6,8 @@
         Response.Redirect("~/Login/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var issuedate = DateTime.Now;
+    Model.issuedate = issuedate;
 }
 
 <!-- Mobile Specific Metas -->
@@ -15,9 +17,6 @@
 <link rel="stylesheet" type="text/css" href="/assets/fonts/material-design-iconic-font.min.css">
 <!-- Main Style Css -->
 <link rel="stylesheet" href="/assets/css/styler.css" />
-
-    @*@using (Html.BeginForm("ProfileEdit", "Home", FormMethod.Post))
-    {*@
         <div class="page-content">
             <div class="form-v1-content">
                 <div class="wizard-form">
@@ -37,14 +36,14 @@
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Student Name</legend>
-                                                @Html.HiddenFor(model => model.Studentid)
-                                                @Html.EditorFor(model => model.Studentname,new { htmlAttributes=new{@class="form-control",@id="fast-name",@type="text",@name="fast-name"} })
+                                                @*@Html.HiddenFor(model => model.Studentid)*@
+                                                @Html.EditorFor(model => model.Studentname, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Student ID</legend>
-                                                @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control", @type = "text",@readonly="readonly" } })
                                             </fieldset>
                                         </div>
                                     </div>
@@ -52,13 +51,13 @@
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Father's Name</legend>
-                                                @Html.EditorFor(model => model.fathername, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.fathername, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Mother's Name</legend>
-                                                @Html.EditorFor(model => model.mothername, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.mothername, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
                                     </div>
@@ -66,13 +65,19 @@
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Gender</legend>
-                                               @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @*<select class="form-control" id="gender" name="gender">
+                                                    <option value="0" selected>Select Gender</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Other</option>
+                                                </select>*@
+                                                @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
                                             </fieldset>
                                         </div>
                                         <div class="form-holder">
                                             <fieldset>
                                                 <legend>Religion</legend>
-                                                @Html.EditorFor(model => model.Studentid, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.religion, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
                                             </fieldset>
                                         </div>
                                     </div>
@@ -80,7 +85,7 @@
                                         <div class="form-holder form-holder-2">
                                             <fieldset>
                                                 <legend>Address</legend>
-                                                @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
                                     </div>
@@ -88,7 +93,7 @@
                                         <div class="form-holder form-holder-2">
                                             <fieldset>
                                                 <legend>Email</legend>
-                                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
                                     </div>
@@ -96,41 +101,14 @@
                                         <div class="form-holder form-holder-2">
                                             <fieldset>
                                                 <legend>Phone Number</legend>
-                                                @Html.EditorFor(model => model.contactno, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.contactno, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="form-row form-row-date">
                                         <div class="form-holder form-holder-2">
                                             <label class="special-label">Birth Date:</label>
-                                            <select name="month" id="month">
-                                                <option value="MM" disabled selected>DD</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                            </select>
-                                            <select name="date" id="date">
-                                                <option value="DD" disabled selected>MM</option>
-                                                <option value="Feb">Feb</option>
-                                                <option value="Mar">Mar</option>
-                                                <option value="Apr">Apr</option>
-                                                <option value="May">May</option>
-                                            </select>
-                                            <select name="year" id="year">
-                                                <option value="YYYY" disabled selected>YYYY</option>
-                                                <option value="2017">2017</option>
-                                                <option value="2016">2016</option>
-                                                <option value="2015">2015</option>
-                                                <option value="2014">2014</option>
-                                                <option value="2013">2013</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-row form-row-date">
-                                        <div class="form-holder form-holder-2">
-                                            <label class="special-label">Birth Date:</label>
-                                            @Html.EditorFor(model => model.dob, "{0:dd-MM-yyyy}", new { htmlAttributes = new {@class="form-control",@type="date"}})
+                                            @Html.EditorFor(model => model.dob, "{0:dd-mm-yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             @*@Html.FormatValue((object)Convert.ChangeType(Model.dob, typeof(object)),"{0: dd-MM-yyyy}")*@
                                         </div>
                                     </div>
@@ -138,16 +116,45 @@
                                         <div class="form-holder form-holder-2">
                                             <fieldset>
                                                 <legend>National ID</legend>
-                                                @Html.EditorFor(model => model.nid, new { htmlAttributes = new { @class = "form-control", @id = "last-name", @type = "text" } })
+                                                @Html.EditorFor(model => model.nid, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                             </fieldset>                         
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <button class="btn btn-success" onclick="ProfileUpdate()">
+                                        <button class="btn btn-success" onclick="updatestu()">
                                             Update
                                         </button>   
                                     </div>
                                 </div>
+                            </section>
+
+                            <!---SECTION Image -->
+                            <h2>
+                                <span class="step-text">Change Picture</span>
+                            </h2>
+                            <section>
+                                <div class="inner">
+                                    <div class="wizard-header">
+                                        <h3 class="heading">Set Picture</h3>
+                                        <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder-2">
+                                            <fieldset>
+                                                <legend>Picture</legend>
+                                                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", @type = "file" } }) 
+                                            </fieldset>
+                                        </div>
+                                      </div>
+                                        <div class="form-row">
+                                            <div class="form-holder form-holder-2">
+                                                <button class="btn btn-success" onclick="">Browse</button>
+                                            </div>
+                                            <div class="form-holder form-holder-2">
+                                                <button class="btn btn-success" onclick="">Upload</button>
+                                            </div>                                          
+                                        </div>
+                                    </div>
                             </section>
                             <!-- SECTION 2 -->
                             <h2>
@@ -162,7 +169,13 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-holder form-holder-1">
-                                            <input type="text" name="find_bank" id="find_bank" placeholder="Find Your Bank" class="form-control" required>
+                                            @*<input type="text" name="find_bank" id="find_bank" placeholder="Find Your Bank" class="form-control" required>*@
+                                            <select name="find_bank" id="find_bank" required>
+                                                <option value="0" selected>Payment Type</option>
+                                                <option value="1">Cheque </option>
+                                                <option value="2">Cash</option>
+                                                <option value="3">Online Transaction</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-row-total">
@@ -199,9 +212,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder-2">
+                                            <fieldset>
+                                                <legend>Account No</legend>
+                                                @Html.EditorFor(model => model.accountno, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "XXXXXXXXXXX" } })
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder-2">
+                                            <fieldset>
+                                                <legend>Bank Name</legend>
+                                                <select name="find_bank" id="find_bank" required>
+                                                    <option value="0" selected>HSBC</option>
+                                                    <option value="1">Dutch-Bangla</option>
+                                                    <option value="2">Sonali Bank</option>
+                                                    <option value="3">Islami Bank Bangladesh Limited (IBBL)</option>
+                                                    <option value="4">Janata Bank</option>
+                                                    <option value="5">Grameen Bank</option>
+                                                    <option value="6">Standard Chartered Bank</option>
+                                                </select>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder-2">
+                                            <fieldset>
+                                                <legend>Bank Receipt/Reference No</legend>
+                                                @Html.EditorFor(model => model.bankreceiptno, new { htmlAttributes = new { @class = "form-control", @type = "text",@placeholder="XXXXXXXXXXXX" } })
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <button class="btn btn-success" onclick="updatestu()">
+                                            Update
+                                        </button>
+                                    </div>
                                 </div>
                             </section>
-                            <!-- SECTION 3 -->
+                            <!-- SECTION Status -->
                             <h2>
                                 @*<p class="step-icon"><span>03</span></p>*@
                                 <span class="step-text">Student status</span>
@@ -209,8 +259,59 @@
                             <section>
                                 <div class="inner">
                                     <div class="wizard-header">
-                                        <h3 class="heading">Set Financial Goals</h3>
-                                        <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                        <h3 class="heading">Student status</h3>
+                                        <p>Maintained by department</p>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-holder">
+                                            <fieldset>
+                                                <legend>Department</legend>                                         
+                                                @Html.EditorFor(model => model.department, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-holder">
+                                            <fieldset>
+                                                <legend>Program</legend>
+                                                @Html.EditorFor(model => model.program, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-holder">
+                                            <fieldset>
+                                                <legend>Batch No</legend>
+                                                @Html.EditorFor(model => model.batchno, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
+                                            </fieldset>
+                                        </div>
+                                        <div class="form-holder">
+                                            <fieldset>
+                                                <legend>Session Year</legend>
+                                                @Html.EditorFor(model => model.sessionyear, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "readonly" } })
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-holder form-holder-2">
+                                            <fieldset>
+                                                <legend>CGPA</legend>
+                                                @Html.EditorFor(model => model.cgpa, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @type = "text" } })
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </section>
+                            <!-- SECTION Register -->
+                            <h2>
+                                @*<p class="step-icon"><span>03</span></p>*@
+                                <span class="step-text">Register event</span>
+                            </h2>
+                            <section>
+                                <div class="inner">
+                                    <div class="wizard-header">
+                                        <h3 class="heading">Registration for Testimonial</h3>
+                                        <p>Enter submit button to request for Testimonial</p>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-holder form-holder-2">
@@ -219,26 +320,33 @@
                                                 <img src="/assets/images/form-v1-icon-2.png" alt="pay-1">
                                             </label>
                                             <div class="plan-total">
-                                                <span class="plan-title">Specific Plan</span>
-                                                <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
+                                                <span class="plan-title">Head of the Department</span>
+                                                <p class="plan-text">@Html.DisplayFor(model=>model.Studentname)</p>
                                             </div>
                                             <input type="radio" class="radio" name="radio1" id="plan-2" value="plan-2">
                                             <label class="plan-icon plan-2-label" for="plan-2">
                                                 <img src="/assets/images/form-v1-icon-2.png" alt="pay-1">
                                             </label>
                                             <div class="plan-total">
-                                                <span class="plan-title">Medium Plan</span>
-                                                <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
+                                                <span class="plan-title">Prepared by</span>
+                                                <p class="plan-text">@Html.DisplayFor(model => model.Studentname)</p>
                                             </div>
                                             <input type="radio" class="radio" name="radio1" id="plan-3" value="plan-3" checked>
                                             <label class="plan-icon plan-3-label" for="plan-3">
                                                 <img src="/assets/images/form-v1-icon-3.png" alt="pay-2">
                                             </label>
                                             <div class="plan-total">
-                                                <span class="plan-title">Special Plan</span>
-                                                <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
-                                            </div>                                            
+                                                <span class="plan-title">Date of issue</span>
+                                                @*<p class="plan-text">@Html.DisplayFor(model=>model.dob,new { htmlAttributes = new { @value = DateTime.Today, @readonly = "readonly" } })</p>*@
+                                                @*<p class="plan-text">@Html.TextBox("DateCreated", DateTime.Today, new { @readonly = "readonly" })</p>*@
+                                                <p class="plan-text">@Html.DisplayFor(model=>model.issuedate) </p>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <button class="btn btn-success" onclick="updatestu()">
+                                            Submit
+                                        </button>
                                     </div>
                                 </div>
                             </section>
@@ -247,10 +355,38 @@
                 </div>
             </div>
         </div>         
-    @*}*@
-
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/js/jquery.steps.js"></script>
 <script src="/assets/js/main.js"></script>
+<script type="text/javascript">
+
+
+    function updatestu() {
+        var data = {
+            Studentname: $("#Studentname").val(),
+            Studentid : $("#Studentid").val(),
+            //fathername: $("#fathername").val(),
+            //mothername: $("#mothername").val(),
+            //address: $("#address").val(),
+            //email: $("#email").val(),
+            //nid: $("#nid").val(),
+            //contactno: $("#contactno").val(),
+            accountno:$("#accountno").val()
+            
+        };        
+        //alert(data, Studentid);
+        //console.log(data, Studentid);
+        $.ajax({
+            type: "POST",
+            url: '/Home/UpdateDetails',
+            data: JSON.stringify(data),
+            datatype: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function () {               
+            }
+
+        });
+    };
+</script>
 
 
