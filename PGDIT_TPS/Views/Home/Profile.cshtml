@@ -236,14 +236,7 @@
                                             </fieldset>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-holder form-holder-2">
-                                            <fieldset>
-                                                <legend>Bank Receipt/Reference No</legend>
-                                                @Html.EditorFor(model => model.bankreceiptno, new { htmlAttributes = new { @class = "form-control", @type = "text",@placeholder="XXXXXXXXXXXX" } })
-                                            </fieldset>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-row">
                                         <button class="btn btn-success" onclick="updatestu()">
                                             Update
@@ -311,7 +304,7 @@
                                 <div class="inner">
                                     <div class="wizard-header">
                                         <h3 class="heading">Registration for Testimonial</h3>
-                                        <p>Enter submit button to request for Testimonial</p>
+                                        <p>Press the submit button to send request for Testimonial</p>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-holder form-holder-2">
@@ -321,7 +314,7 @@
                                             </label>
                                             <div class="plan-total">
                                                 <span class="plan-title">Head of the Department</span>
-                                                <p class="plan-text">@Html.DisplayFor(model=>model.Studentname)</p>
+                                                <p class="plan-text">Md. Saeed Siddik</p>
                                             </div>
                                             <input type="radio" class="radio" name="radio1" id="plan-2" value="plan-2">
                                             <label class="plan-icon plan-2-label" for="plan-2">
@@ -329,7 +322,7 @@
                                             </label>
                                             <div class="plan-total">
                                                 <span class="plan-title">Prepared by</span>
-                                                <p class="plan-text">@Html.DisplayFor(model => model.Studentname)</p>
+                                                <p class="plan-text">Mimma Aker Omi</p>
                                             </div>
                                             <input type="radio" class="radio" name="radio1" id="plan-3" value="plan-3" checked>
                                             <label class="plan-icon plan-3-label" for="plan-3">
@@ -341,12 +334,25 @@
                                                 @*<p class="plan-text">@Html.TextBox("DateCreated", DateTime.Today, new { @readonly = "readonly" })</p>*@
                                                 <p class="plan-text">@Html.DisplayFor(model=>model.issuedate) </p>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="form-holder form-holder-2">
+                                                    <fieldset>
+                                                        <legend>Bank Receipt/Reference No</legend>
+                                                        @Html.EditorFor(model => model.bankreceiptno, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "XXXXXXXXXXXX" } })
+                                                    </fieldset>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <button class="btn btn-success" onclick="updatestu()">
-                                            Submit
-                                        </button>
+                                        <div class="form-holder form-holder-2">
+                                            <button class="btn btn-success" onclick="insertReceipt()">
+                                                Submit
+                                            </button>
+                                         </div>
+                                        <div class="form-holder form-holder-2">
+                                           @Html.ActionLink("Send Request", "Submit", "Home", null, new { @class = "btn btn-success", @type = "button",@id="fin" })
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -359,19 +365,18 @@
 <script src="/assets/js/jquery.steps.js"></script>
 <script src="/assets/js/main.js"></script>
 <script type="text/javascript">
-
-
     function updatestu() {
         var data = {
             Studentname: $("#Studentname").val(),
             Studentid : $("#Studentid").val(),
-            //fathername: $("#fathername").val(),
-            //mothername: $("#mothername").val(),
-            //address: $("#address").val(),
-            //email: $("#email").val(),
-            //nid: $("#nid").val(),
-            //contactno: $("#contactno").val(),
-            accountno:$("#accountno").val()
+            fathername: $("#fathername").val(),
+            mothername: $("#mothername").val(),
+            address: $("#address").val(),
+            email: $("#email").val(),
+            nid: $("#nid").val(),
+            contactno: $("#contactno").val(),
+            accountno: $("#accountno").val(),
+            issuedate: $("#issuedate").val()
             
         };        
         //alert(data, Studentid);
@@ -387,6 +392,33 @@
 
         });
     };
+    $('#fin').hide();
+    function insertReceipt() {
+        var data = {
+            Studentid: $("#Studentid").val(),
+            bankreceiptno: $("#bankreceiptno").val()
+
+        };
+        if ($("#bankreceiptno").val() != 0) {
+        $.ajax({
+            type: "POST",
+            url: '/Home/SentRequest',
+            data: JSON.stringify(data),
+            datatype: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //$('#fin').show();
+            }
+        })
+        
+        alert("Submitted successfully");       
+        
+        }
+        else {            
+            alert("You have to provide Bank Receipt/Reference No");
+        }
+        
+    };   
 </script>
 
 

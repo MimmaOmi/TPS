@@ -22,8 +22,8 @@ namespace PGDIT_TPS.Controllers
             string constring = ConfigurationManager.ConnectionStrings["Entities"].ToString();
             con = new OracleConnection(constring);
         }
-        OracleCommand cmd = new OracleCommand();
-        Account acc = new Account();
+        //OracleCommand cmd = new OracleCommand();
+        //Account acc = new Account();
         //string stuname = null;
         //string fathername = null;
         //string mothername = null;
@@ -41,8 +41,9 @@ namespace PGDIT_TPS.Controllers
         public ActionResult Profile(string Studentid)
         {
             connection();
+            OracleCommand cmd = new OracleCommand();
             cmd.Connection = con;
-            cmd.CommandText = "SELECT * FROM t_student a,t_gender b,t_religion c,t_provideddocument d,t_program e,t_department f where a.genderid = b.genderid and a.religionid=c.religionid and a.studentid=d.studentid and a.programid=e.programid and f.departmentid=e.departmentid  and a.studentid = '"+ Studentid + "'";
+            cmd.CommandText = "SELECT * FROM t_student a,t_gender b,t_religion c,t_provideddocument d,t_program e,t_department f where a.genderid = b.genderid(+) and a.religionid=c.religionid(+) and a.studentid=d.studentid(+) and a.programid=e.programid(+) and e.departmentid=f.departmentid(+)  and a.studentid = '"+ Studentid + "'";
             con.Open();
             OracleDataReader dr = cmd.ExecuteReader();
             dr.Read();            
@@ -59,13 +60,13 @@ namespace PGDIT_TPS.Controllers
             string religion = dr["religion"].ToString();
             string bankrecno = dr["BANKRECEIPTNO"].ToString();
             string program = dr["program"].ToString();
-            string department = dr["department"].ToString();
+            string department = dr["department"].ToString().ToUpper();
             decimal cgpa = decimal.Parse(dr["cgpa"].ToString());
             int batchno = Convert.ToInt16(dr["batchno"]);
             string sessionyear = dr["sessionyear"].ToString();
             int accountno = Convert.ToInt32(dr["accountno"]);
             //DateTime dob = dr.GetDateTime(9);
-            //Account acc = new Account();
+            Account acc = new Account();
             acc.Studentname = stuname;
             acc.Studentid = stuid;
             acc.fathername = fathername;
@@ -97,7 +98,8 @@ namespace PGDIT_TPS.Controllers
         //}
         public ActionResult Update(string Studentid)
         {
-            connection();            
+            connection();
+            OracleCommand cmd = new OracleCommand();
             cmd.CommandText = "select * from T_Student where studentid='"+ Studentid + "'";
             cmd.Connection = con;
             con.Open();
@@ -115,7 +117,7 @@ namespace PGDIT_TPS.Controllers
             string nid = dr["nid"].ToString();
             string dob = Convert.ToDateTime(dr["dob"]).ToString();
             //DateTime dob = dr.GetDateTime(9);
-            //Account acc = new Account();
+            Account acc = new Account();
             acc.Studentname = stuname;
             acc.Studentid = stuid;
             acc.fathername = fathername;
@@ -129,39 +131,28 @@ namespace PGDIT_TPS.Controllers
             return View("Update",acc);
             
         }
-        public ActionResult edit()
-        {
-            cmd.CommandText = "select * from T_Student where studentid='pgdit2005'";
-            cmd.Connection = con;
-            con.Open();
-            OracleDataAdapter da =new OracleDataAdapter();
-            System.Data.DataSet dt=new System.Data.DataSet();
-            da.Fill(dt);
-            
-
-            return View();
-        }
+       
 
         [HttpPost]
         public JsonResult UpdateDetails(Account acc,string Studentid)
         {
 
             connection();
+            OracleCommand cmd = new OracleCommand();
             cmd.Connection = con;
             cmd.CommandText = "UpdateStudentDetails";
             cmd.CommandType = CommandType.StoredProcedure;
             
             cmd.Parameters.Add("pstdname", acc.Studentname);
             cmd.Parameters.Add("pstdid", OracleDbType.Varchar2).Value = Studentid;
-            //cmd.Parameters.Add("paddress", acc.address);
-            //cmd.Parameters.Add("pStdid", acc.Studentid);
-            //cmd.Parameters.Add("pemail", acc.email);
-            //cmd.Parameters.Add("pfathername", acc.fathername);
-            //cmd.Parameters.Add("pMothername", acc.mothername);            
-            //cmd.Parameters.Add("pContactno", acc.contactno);           
-            //cmd.Parameters.Add("pDob", acc.dob);
-            //cmd.Parameters.Add("pNid", acc.nid);
+            cmd.Parameters.Add("pContactno", acc.contactno);
+            cmd.Parameters.Add("paddress", acc.address);
+            cmd.Parameters.Add("pemail", acc.email);
             cmd.Parameters.Add("pAccno", acc.accountno);
+            cmd.Parameters.Add("pfathername", acc.fathername);
+            cmd.Parameters.Add("pMothername", acc.mothername);                                  
+            cmd.Parameters.Add("pNid", acc.nid);
+            
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -218,6 +209,7 @@ namespace PGDIT_TPS.Controllers
         public ActionResult Genderlookup()
         {
             connection();
+            OracleCommand cmd = new OracleCommand();
             con.Open();
             cmd.CommandText = "select * from t_gender";
             var sql = cmd.CommandText;
@@ -233,6 +225,45 @@ namespace PGDIT_TPS.Controllers
         public ActionResult About()
         {
             return View();
+        }
+        public ActionResult Submit()
+        {
+            //connection();
+            //OracleCommand cmd = new OracleCommand();
+            //cmd.Connection = con;
+            //cmd.CommandText = "select*from T_PROVIDEDDOCUMENT a,T_DOCUMENTTYPE b where a.DOCUMENTTYPEID=b.DOCUMENTTYPEID";
+            //con.Open();
+            //OracleDataReader dr = cmd.ExecuteReader();
+            //dr.Read();
+            //string bnkrepno = dr["BANKRECEIPTNO"].ToString();
+            ////string ISSUEDATE = Convert.ToDateTime(dr["ISSUEDATE"]).ToString();
+            //string DOCUMENT = dr["DOCUMENT"].ToString();
+            ////string bnkrepno = dr["BANKRECEIPTNO"].ToString();
+            //Document doc = new Document();
+            //doc.bnkrepno = bnkrepno;
+            //doc.document = DOCUMENT;
+            return View();
+        }
+        [HttpPost]
+        public JsonResult SentRequest(Account acc)
+        {
+            if(acc.bankreceiptno != null)
+            {
+                connection();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "InsertProvideddocRecord";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("pbankrecno", acc.bankreceiptno);
+                cmd.Parameters.Add("pstdid", acc.Studentid);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                //Submit();
+            }
+                
+            return Json(new{ success=true,data=acc});
+
         }
         public ActionResult Programs()
         {

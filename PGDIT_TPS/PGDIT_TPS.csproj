@@ -146,6 +146,7 @@
     <Content Include="assets\images\iit.png" />
     <Content Include="assets\images\loginbg.jpg" />
     <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\mailbox.jpg" />
     <Content Include="assets\images\mimma.jpeg" />
     <Content Include="assets\images\mqdefault.jpg" />
     <Content Include="assets\images\news2.jpg" />
@@ -272,6 +273,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account\Account.cs" />
+    <Compile Include="Models\Account\Document.cs" />
     <Compile Include="Models\Account\Gender.cs" />
     <Compile Include="Models\Account\Genderlookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -296,6 +298,7 @@
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Home\Update.cshtml" />
     <Content Include="Views\Home\Reports.cshtml" />
+    <Content Include="Views\Home\Submit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

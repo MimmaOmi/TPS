@@ -69,4 +69,3 @@ C:\Users\User\Desktop\GitHub\Shahidul101\TPS\PGDIT_TPS\bin\System.Web.Helpers.xm
 C:\Users\User\Desktop\GitHub\Shahidul101\TPS\PGDIT_TPS\bin\System.Web.Mvc.xml
 C:\Users\User\Desktop\GitHub\Shahidul101\TPS\PGDIT_TPS\obj\Debug\PGDIT_TPS.dll
 C:\Users\User\Desktop\GitHub\Shahidul101\TPS\PGDIT_TPS\obj\Debug\PGDIT_TPS.pdb
-C:\Users\User\Desktop\GitHub\Shahidul101\TPS\PGDIT_TPS\obj\Debug\PGDIT_TPS.csprojResolveAssemblyReference.cache

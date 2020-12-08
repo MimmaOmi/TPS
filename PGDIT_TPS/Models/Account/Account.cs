@@ -20,6 +20,7 @@ namespace PGDIT_TPS.Models.Account
         public string fathername { get; set; }
         public string mothername { get; set; }
         public string address { get; set; }
+        [Required(ErrorMessage = "Contact No cannot be empty")]
         public string contactno { get; set; }
         public string nid { get; set; }
         public string email { get; set; }
@@ -27,11 +28,11 @@ namespace PGDIT_TPS.Models.Account
         public int accountno { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]        
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]        
         public DateTime dob { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]
         public DateTime issuedate { get; set; }
         public HttpFileCollection image { get; set; }
         //public Nullable<int> genderid { get; set; }
