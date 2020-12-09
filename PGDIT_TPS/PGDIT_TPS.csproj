@@ -276,6 +276,7 @@
     <Compile Include="Models\Account\Document.cs" />
     <Compile Include="Models\Account\Gender.cs" />
     <Compile Include="Models\Account\Genderlookup.cs" />
+    <Compile Include="Models\Common\connection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -308,7 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Common\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
